@@ -427,9 +427,6 @@ export default function SettingsView() {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
-    countryCode: "+1",
-    countryIso: "US", // Added for unique Select value
     message: ""
   });
 
@@ -447,7 +444,6 @@ export default function SettingsView() {
           firstName: supportForm.firstName,
           lastName: supportForm.lastName,
           email: supportForm.email,
-          phone: `${supportForm.countryCode} ${supportForm.phone}`,
           message: supportForm.message
         })
       });
@@ -481,9 +477,6 @@ export default function SettingsView() {
         firstName: "",
         lastName: "",
         email: "",
-        phone: "",
-        countryCode: "+1",
-        countryIso: "US",
         message: ""
       });
 
@@ -796,35 +789,6 @@ export default function SettingsView() {
                         </div>
                       </div>
 
-                      <div className="flex gap-2">
-                        <Select
-                          value={supportForm.countryIso}
-                          onValueChange={(val) => {
-                            const country = countries.find(c => c.code === val);
-                            if (country) {
-                              setSupportForm({ ...supportForm, countryIso: val, countryCode: country.dial_code });
-                            }
-                          }}
-                        >
-                          <SelectTrigger className="w-[90px]">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {countries.map((c) => (
-                              <SelectItem key={c.code} value={c.code}>
-                                {c.flag} {c.dial_code}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <Input
-                          placeholder="Phone number"
-                          className="flex-1"
-                          type="tel"
-                          value={supportForm.phone}
-                          onChange={(e) => setSupportForm({ ...supportForm, phone: e.target.value })}
-                        />
-                      </div>
                       <div className="space-y-2">
                         <Textarea
                           placeholder="How can we help?"
